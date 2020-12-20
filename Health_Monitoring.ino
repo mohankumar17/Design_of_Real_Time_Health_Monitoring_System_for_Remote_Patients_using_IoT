@@ -3,8 +3,8 @@
 
 #define USE_ARDUINO_INTERRUPTS true    
 #define DEBUG true
-#define SSID "Mohan"     // "SSID-WiFiname"
-#define PASS "byebye999" // "password"
+#define SSID "###"     // "SSID-WiFiname"
+#define PASS "###" // "password"
 #define IP "184.106.153.149"      // thingspeak.com ip
 
 #include <SoftwareSerial.h>
@@ -13,7 +13,7 @@
 Timer t;
 PulseSensorPlayground pulseSensor;
 
-String msg = "GET /update?key=TY023N69EZ4O0DQW"; 
+String msg = "GET /update?key=#####"; //Replace ### with ThingSpeak Channel API Key
 SoftwareSerial esp8266(10,11);
 
 //Variables
@@ -57,7 +57,7 @@ void setup()
 
 void loop()
 {
-  //panic_button();
+  
 start: //label
     error=0;
    t.update();
@@ -131,7 +131,7 @@ boolean connectWiFi()
 
 void getReadings(){
   raw_myTemp = analogRead(A1);
-  Voltage = (raw_myTemp / 1023.0) * 500; // 5000 to get millivots.
+  Voltage = (raw_myTemp / 1023.0) * 500;
   tempC = Voltage * 0.1; 
   
   //tempC = raw_myTemp*(5.0/1023.0)*100;
@@ -151,41 +151,3 @@ Serial.println(myBPM);                        // Print the value inside of myBPM
     BPM = dtostrf(myBPM, 4, 1, buffer1);
     temp = dtostrf(myTemp, 4, 1, buffer2);  
   }
-
-/*void panic_button(){
-  panic = digitalRead(8);
-    if(panic == HIGH){
-      Serial.println("Patient in danger");
-    Serial.println(panic);
-      String cmd = "AT+CIPSTART=\"TCP\",\"";
-  cmd += IP;
-  cmd += "\",80";
-  Serial.println(cmd);
-  esp8266.println(cmd);
-  delay(2000);
-  if(esp8266.find("Error"))
-  {
-    return;
-  }
-  cmd = msg ;
-  cmd += "&field3=";    
-  cmd += panic;
-  cmd += "\r\n";
-  Serial.print("AT+CIPSEND=");
-  esp8266.print("AT+CIPSEND=");
-  Serial.println(cmd.length());
-  esp8266.println(cmd.length());
-  if(esp8266.find(">"))
-  {
-    Serial.print(cmd);
-    esp8266.print(cmd);
-  }
-  else
-  {
-    Serial.println("AT+CIPCLOSE");
-    esp8266.println("AT+CIPCLOSE");
-    //Resend...
-    error=1;
-  }
-}
-}*/
