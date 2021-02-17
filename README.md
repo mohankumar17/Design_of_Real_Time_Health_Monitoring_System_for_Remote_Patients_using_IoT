@@ -22,3 +22,8 @@ The objectives of the patient health monitoring system are:
 8. Gmail
 9. Google Sheets
 10. BreadBoard and Jumper Wires
+
+
+# How to start implementing the project ?
+contact me via LinkedIN
+https://www.linkedin.com/in/mohan-kumar-48b6ba165/
